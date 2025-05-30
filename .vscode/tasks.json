@@ -1,0 +1,46 @@
+{
+    "version": "2.0.0", // Especifica la versión del esquema de tasks
+    "tasks": [ // Un arreglo que contiene las definiciones de las tareas
+        {
+            "label": "Compile Active Allegro File", // Nombre de la tarea que se muestra en la interfaz de VS Code
+            "type": "shell", // Tipo de tarea, "shell" ejecuta un comando en el shell del sistema
+            // Comando que se ejecutará para compilar
+            // g++ es el compilador de C++
+            // "${file}" es una variable de VS Code que representa el archivo actualmente abierto y activo
+            // -o "${fileBasenameNoExtension}" especifica el nombre del archivo de salida (ejecutable), usando el nombre del archivo activo sin su extensión
+            // -std=c++11 establece el estándar de C++ a C++11
+            // `pkg-config --cflags allegro-5 allegro_font-5 allegro_primitives-5` obtiene las banderas de compilación necesarias para Allegro (directorios de inclusión, etc)
+            // `pkg-config --libs allegro-5 allegro_font-5 allegro_primitives-5` obtiene las bibliotecas necesarias para enlazar con Allegro
+            "command": "g++ \"${file}\" -o \"${fileBasenameNoExtension}\" -std=c++11 `pkg-config --cflags allegro-5 allegro_font-5 allegro_primitives-5` `pkg-config --libs allegro-5 allegro_font-5 allegro_primitives-5`", // El comando a ejecutar
+            "options": { // Opciones adicionales para la ejecución de la tarea
+                "cwd": "${workspaceFolder}" // Establece el directorio de trabajo actual a la raíz del espacio de trabajo del proyecto
+            },
+            "group": { // Define a qué grupo pertenece la tarea
+                "kind": "build", // Tipo de grupo, "build" para tareas de compilación
+                "isDefault": false // Indica si esta tarea es la tarea de compilación predeterminada (en este caso, no lo es)
+            },
+            "problemMatcher": [ // Define cómo VS Code debe interpretar la salida del compilador para encontrar errores y advertencias
+                "$gcc" // Utiliza el detector de problemas predefinido para GCC (el compilador g++)
+            ],
+            "detail": "Compiles the active Allegro C++ file using g++ and pkg-config" // Descripción detallada de la tarea, se podría traducir a "Compila el archivo C++ de Allegro activo usando g++ y pkg-config"
+        },
+        {
+            "label": "Compile and Run Active Allegro File", // Nombre de la tarea para compilar y luego ejecutar
+            "type": "shell", // Tipo de tarea, "shell"
+            "command": "./\"${fileBasenameNoExtension}\"", // Comando para ejecutar el archivo compilado
+                                                        // "./" indica que el ejecutable está en el directorio actual
+                                                        // "${fileBasenameNoExtension}" es el nombre del ejecutable (el mismo que se usó en la tarea de compilación)
+            "dependsOn": "Compile Active Allegro File", // Especifica que esta tarea depende de la tarea "Compile Active Allegro File"
+                                                      // Esto asegura que el archivo se compile antes de intentar ejecutarlo
+            "options": { // Opciones adicionales
+                "cwd": "${workspaceFolder}" // Directorio de trabajo actual
+            },
+            "group": { // Grupo de la tarea
+                "kind": "build", // Tipo de grupo, "build"
+                "isDefault": true // Esta es la tarea de compilación predeterminada (Ctrl+Shift+B o Cmd+Shift+B la ejecutarán)
+            },
+            "problemMatcher": [], // No se necesita un detector de problemas para la ejecución, solo para la compilación
+            "detail": "Compiles and runs the active Allegro C++ file" // Descripción detallada, se podría traducir a "Compila y ejecuta el archivo C++ de Allegro activo"
+        }
+    ]
+}
