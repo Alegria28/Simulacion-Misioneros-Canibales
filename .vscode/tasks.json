@@ -11,7 +11,7 @@
             // -std=c++11 establece el estándar de C++ a C++11
             // `pkg-config --cflags allegro-5 allegro_font-5 allegro_primitives-5` obtiene las banderas de compilación necesarias para Allegro (directorios de inclusión, etc)
             // `pkg-config --libs allegro-5 allegro_font-5 allegro_primitives-5` obtiene las bibliotecas necesarias para enlazar con Allegro
-            "command": "g++ \"${file}\" -o \"${fileBasenameNoExtension}\" -std=c++11 `pkg-config --cflags allegro-5 allegro_font-5 allegro_primitives-5` `pkg-config --libs allegro-5 allegro_font-5 allegro_primitives-5`", // El comando a ejecutar
+            "command": "g++ \"${file}\" -o \"${fileBasenameNoExtension}\" -std=c++11 `pkg-config --cflags allegro-5 allegro_font-5 allegro_primitives-5 allegro_ttf-5` `pkg-config --libs allegro-5 allegro_font-5 allegro_primitives-5 allegro_ttf-5`", // El comando a ejecutar
             "options": { // Opciones adicionales para la ejecución de la tarea
                 "cwd": "${workspaceFolder}" // Establece el directorio de trabajo actual a la raíz del espacio de trabajo del proyecto
             },
