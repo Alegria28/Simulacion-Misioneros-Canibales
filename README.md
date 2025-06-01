@@ -10,6 +10,8 @@ Este proyecto es una simulación gráfica del clásico problema de lógica de lo
 *   **Entrada de Usuario:** Permite al usuario especificar el número inicial de misioneros y caníbales.
 *   **Control de Velocidad:** El usuario puede ajustar la velocidad de la animación de la solución.
 *   **Detección de Estados Inválidos:** Verifica la validez de los estados para asegurar que los misioneros no sean superados en número por los caníbales en ninguna orilla.
+*   **Generación de Archivo de Resultados:** Cuando se encuentra una solución, se genera automáticamente un archivo `resultados.txt` con la secuencia completa de pasos.
+*   **Controles de Navegación:** Incluye opciones para regresar al menú principal y reiniciar la simulación sin necesidad de cargar archivos.
 *   **Interfaz Interactiva:** Guía al usuario a través de diferentes fases: entrada de datos, resolución/animación, y estado final (solución encontrada o sin solución).
 
 ## Requisitos
@@ -76,13 +78,53 @@ Luego, para ejecutar la simulación:
 
 2.  **Visualización de la Solución:**
     *   Si se encuentra una solución, la animación comenzará a mostrar los pasos.
-    *   Usa la **FLECHA ARRIBA** para aumentar la velocidad de la simulación.
+    *   Usa la **FLECHA ARRIBA** para aumentar la velocidad de la simulación (máximo 10x).
     *   Usa la **FLECHA ABAJO** para disminuir la velocidad de la simulación (mínimo 0.5x).
+    *   Presiona **R** para regresar al menú principal en cualquier momento.
+    *   Presiona **ESPACIO** para reiniciar la simulación con los mismos valores iniciales.
 
 3.  **Fin de la Simulación:**
     *   Si se encuentra una solución, se mostrará el mensaje "SOLUCION ENCONTRADA!" y "Simulacion Completa".
+    *   Los resultados se guardan automáticamente en un archivo `resultados.txt` en el directorio del proyecto.
     *   Si no se encuentra una solución para los valores dados, se mostrará "NO SE ENCONTRO SOLUCION para estos valores."
     *   Presiona **ESC** en cualquier momento para salir del programa.
+    *   Presiona **R** para regresar al menú principal y probar otros valores.
+
+## Controles del Programa
+
+### Menú Principal (Configuración):
+*   **FLECHA ARRIBA/ABAJO**: Aumentar/disminuir el número seleccionado
+*   **FLECHA IZQUIERDA/DERECHA**: Cambiar entre misioneros y caníbales
+*   **ENTER**: Iniciar la simulación
+*   **ESC**: Salir del programa
+
+### Durante la Simulación:
+*   **FLECHA ARRIBA/ABAJO**: Ajustar velocidad de animación (0.5x - 10x)
+*   **R**: Regresar al menú principal
+*   **ESPACIO**: Reiniciar la simulación con los mismos valores
+*   **ESC**: Salir del programa
+
+### Sin Solución:
+*   **R**: Regresar al menú principal
+*   **ESC**: Salir del programa
+
+## Archivo de Resultados
+
+Cuando se encuentra una solución exitosa, el programa genera automáticamente un archivo `resultados.txt` que contiene:
+*   Los parámetros del problema (número de misioneros y caníbales iniciales)
+*   La capacidad del bote
+*   Una secuencia detallada de todos los pasos de la solución
+
+**Ejemplo de contenido del archivo:**
+```
+Solución para Misioneros: 3, Caníbales: 3
+Capacidad del bote: 2
+------------------------------------------
+Paso 0: Izq(M:3, C:3) Der(M:0, C:0) Bote:Izquierda
+Paso 1: Izq(M:3, C:1) Der(M:0, C:2) Bote:Derecha
+Paso 2: Izq(M:3, C:2) Der(M:0, C:1) Bote:Izquierda
+...
+```
 
 ## Estructura del Código
 
@@ -92,8 +134,31 @@ Luego, para ejecutar la simulación:
     *   Función recursiva `resolver_mc_recursivo` para encontrar la solución.
     *   Funciones de dibujo (`dibujar_persona`, `dibujar_estado`) utilizando Allegro.
     *   La función `main` que maneja el bucle principal del juego, eventos y la lógica de las fases.
+    *   Generación automática del archivo de resultados cuando se encuentra una solución.
+
+## Archivos Generados
+
+*   `resultados.txt`: Se crea automáticamente cuando se encuentra una solución. Contiene la secuencia completa de pasos para resolver el problema.
 
 ## Lógica del Problema
 
 El problema consiste en mover a todos los misioneros y caníbales de una orilla de un río a la otra, utilizando un bote con una capacidad limitada (en esta simulación, 2 personas). La restricción principal es que en ninguna orilla, ni en el bote, el número de caníbales puede superar al número de misioneros, ya que de lo contrario los misioneros serían devorados.
-El bote no puede cruzar el río vacío.
+
+**Reglas del problema:**
+*   El bote puede transportar máximo 2 personas por viaje
+*   El bote no puede cruzar el río vacío (debe llevar al menos 1 persona)
+*   En ningún momento los caníbales pueden superar en número a los misioneros en ninguna orilla
+*   El objetivo es trasladar a todos los misioneros y caníbales a la orilla derecha
+
+**Casos especiales:**
+*   Si solo hay caníbales (0 misioneros), el problema siempre tiene solución
+*   Si hay más caníbales que misioneros desde el inicio, no hay solución posible
+*   El algoritmo utiliza búsqueda en profundidad (DFS) para encontrar una secuencia válida de movimientos
+
+## Características Técnicas
+
+*   **Algoritmo**: Búsqueda en profundidad (DFS) con detección de estados visitados
+*   **Animación**: Interpolación suave del movimiento del bote entre orillas
+*   **Interfaz**: Sistema de fases con controles intuitivos
+*   **Persistencia**: Guardado automático de resultados en archivo de texto
+*   **Validación**: Verificación continua de la validez de los estados del problema
