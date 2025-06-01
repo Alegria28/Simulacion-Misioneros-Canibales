@@ -679,6 +679,55 @@ int main()
                     // Disminuimos la velocidad en 0.5, utilizando max para tener un tope hasta 0.5
                     velocidad_simulacion = max(0.5f, velocidad_simulacion - 0.5f);
                 }
+                // Si se presiona R, regresar al menú principal
+                else if (evento.keyboard.keycode == ALLEGRO_KEY_R)
+                {
+                    // Cambiamos la fase de vuelta a entrada de teclado
+                    fase_actual = ENTRADA_TECLADO;
+                    // Limpiamos la solución actual
+                    camino_solucion.clear();
+                    // Reiniciamos variables de control de animación
+                    paso_solucion_actual = 0;
+                    tiempo_desde_ultimo_paso = 0;
+                    progreso_animacion_bote = 0.0f;
+                    // Reiniciamos la velocidad de simulación
+                    velocidad_simulacion = 1.0f;
+                }
+                // Si se presiona ESPACIO, reiniciar la simulación con los mismos valores
+                else if (evento.keyboard.keycode == ALLEGRO_KEY_SPACE)
+                {
+                    // Limpiamos la solución actual
+                    camino_solucion.clear();
+                    // Reiniciamos variables de control
+                    paso_solucion_actual = 0;
+                    tiempo_desde_ultimo_paso = 0;
+                    progreso_animacion_bote = 0.0f;
+                    // Reiniciamos la velocidad de simulación
+                    velocidad_simulacion = 1.0f;
+
+                    // Volvemos a resolver el problema con los mismos valores
+                    resolver_mc(num_misioneros_input, num_canibales_input, camino_solucion);
+                    
+                    // Cambiamos la fase 
+                    fase_actual = RESOLVIENDO;
+                    
+                }
+            }
+            // Si estamos en la fase SIN_SOLUCION y se presiona una tecla
+            else if (fase_actual == SIN_SOLUCION)
+            {
+                // Si se presiona R, regresar al menú principal
+                if (evento.keyboard.keycode == ALLEGRO_KEY_R)
+                {
+                    // Cambiamos la fase de vuelta a entrada de teclado
+                    fase_actual = ENTRADA_TECLADO;
+                    // Limpiamos variables
+                    camino_solucion.clear();
+                    paso_solucion_actual = 0;
+                    tiempo_desde_ultimo_paso = 0;
+                    progreso_animacion_bote = 0.0f;
+                    velocidad_simulacion = 1.0f;
+                }
             }
         }
 
@@ -780,12 +829,17 @@ int main()
                 stringstream msg_velocidad;
                 msg_velocidad << "Velocidad: " << velocidad_simulacion << "x (ARRIBA/ABAJO para cambiar)";
                 al_draw_text(fuente, al_map_rgb(200, 200, 200), 10, 10, ALLEGRO_ALIGN_LEFT, msg_velocidad.str().c_str());
+                
+                // Mostramos los controles disponibles
+                al_draw_text(fuente, al_map_rgb(180, 180, 180), 10, 30, ALLEGRO_ALIGN_LEFT, "R - Regresar al menu | ESPACIO - Reiniciar simulacion");
+                
                 // Si la simulación ha sido completada y estamos en la fase RESUELTO
                 if (fase_actual == RESUELTO)
                 {
                     // Mostramos un mensaje indicando que la simulación está completa y cómo salir
-                    al_draw_text(fuente, al_map_rgb(0, 255, 0), anchoPantalla / 2, altoPantalla - 40, ALLEGRO_ALIGN_CENTRE, "Simulacion Completa. Presiona ESC para salir");
-                    al_draw_text(fuente, al_map_rgb(180, 180, 180), anchoPantalla / 2, altoPantalla - 20, ALLEGRO_ALIGN_CENTRE, "Resultados guardados en simulation_results.txt");
+                    al_draw_text(fuente, al_map_rgb(0, 255, 0), anchoPantalla / 2, altoPantalla - 60, ALLEGRO_ALIGN_CENTRE, "Simulacion Completa. Presiona ESC para salir");
+                    al_draw_text(fuente, al_map_rgb(180, 180, 180), anchoPantalla / 2, altoPantalla - 40, ALLEGRO_ALIGN_CENTRE, "Resultados guardados en resultados.txt");
+                    al_draw_text(fuente, al_map_rgb(255, 255, 0), anchoPantalla / 2, altoPantalla - 20, ALLEGRO_ALIGN_CENTRE, "R - Menu | ESPACIO - Reiniciar | ESC - Salir");
                 }
             }
             // Si estamos en esta fase ya que no se encontró solucion al problema
@@ -793,7 +847,7 @@ int main()
             {
                 // Simplemente mostramos mensajes informativos
                 al_draw_text(fuente, al_map_rgb(255, 0, 0), anchoPantalla / 2, altoPantalla / 2, ALLEGRO_ALIGN_CENTRE, "NO SE ENCONTRO SOLUCION para estos valores.");
-                al_draw_text(fuente, al_map_rgb(180, 180, 180), anchoPantalla / 2, altoPantalla - 40, ALLEGRO_ALIGN_CENTRE, "Presiona ESC para salir.");
+                al_draw_text(fuente, al_map_rgb(180, 180, 180), anchoPantalla / 2, altoPantalla - 40, ALLEGRO_ALIGN_CENTRE, "Presiona ESC para salir | R - Menu ");
             }
 
             // Esta función actualiza la pantalla tras los cambios realizados
