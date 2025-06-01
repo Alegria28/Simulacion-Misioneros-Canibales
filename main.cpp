@@ -1,4 +1,4 @@
-// Librerías de allegro, ver documentación https://liballeg.org/a5docs/5.2.10.1/ cspell: disable
+// Librerías de allegro, ver documentación https://liballeg.org/a5docs/5.2.10.1/ 
 #include <allegro5/allegro5.h>
 #include <allegro5/allegro_font.h>
 #include <allegro5/allegro_primitives.h>
@@ -9,6 +9,7 @@
 #include <sstream>
 #include <algorithm>
 #include <set>
+#include <fstream>
 
 using namespace std;
 
@@ -553,6 +554,38 @@ int main()
                         paso_solucion_actual = camino_solucion.size() - 1;
                         // Reiniciamos el progreso del bote para que se muestre estático en la orilla final
                         progreso_animacion_bote = 0.0f;
+
+                        // Abrimos el archivo resultados, y si este no existe, entonces lo creamos
+                        ofstream archivo_resultados("resultados.txt");
+
+                        // Verificamos si este se abrio correctamente
+                        if (archivo_resultados.is_open())
+                        {
+                            // Imprimimos arriba de este archivo la información sobre el problema que se resolvió
+                            archivo_resultados << "Solución para Misioneros: " << num_misioneros_input << ", Caníbales: " << num_canibales_input << endl;
+                            archivo_resultados << "Capacidad del bote: " << CAPACIDAD_BOTE << endl;
+                            archivo_resultados << "------------------------------------------" << endl;
+                            // Recorremos nuestro vector
+                            for (size_t i = 0; i < camino_solucion.size(); ++i)
+                            {
+                                // Guardamos una instancia temporal para el estado del vector
+                                Estado &s = camino_solucion[i];
+                                // Imprimimos la información de este estado en el archivo
+                                archivo_resultados << "Paso " << i << ": "
+                                                   << "Izq(M:" << s.m_izquierda << ", C:" << s.c_izquierda << ") "
+                                                   << "Der(M:" << s.m_derecha << ", C:" << s.c_derecha << ") "
+                                                   << "Bote:" << (s.bote_pos == 0 ? "Izquierda" : "Derecha") << endl;
+                            }
+                            // Tras finalizar cerramos el archivo
+                            archivo_resultados.close();
+                        }
+                        else
+                        // Si no se pudo abrir o crear
+                        {
+                            // cerr se utiliza como un cout pero este esta especializado para mandar mensajes de errores en stderr, ademas
+                            // de que este no se guarda en buffer y se muestra inmediatamente 
+                            cerr << "Error: No se pudo abrir el archivo resultados.txt para guardar los resultados." << endl;
+                        }
                     }
                     else
                     {
@@ -752,6 +785,7 @@ int main()
                 {
                     // Mostramos un mensaje indicando que la simulación está completa y cómo salir
                     al_draw_text(fuente, al_map_rgb(0, 255, 0), anchoPantalla / 2, altoPantalla - 40, ALLEGRO_ALIGN_CENTRE, "Simulacion Completa. Presiona ESC para salir");
+                    al_draw_text(fuente, al_map_rgb(180, 180, 180), anchoPantalla / 2, altoPantalla - 20, ALLEGRO_ALIGN_CENTRE, "Resultados guardados en simulation_results.txt");
                 }
             }
             // Si estamos en esta fase ya que no se encontró solucion al problema
