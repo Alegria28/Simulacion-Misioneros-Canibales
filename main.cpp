@@ -455,8 +455,8 @@ int main()
     al_install_keyboard();
     // Iniciamos el addon para poder dibujar figuras
     al_init_primitives_addon();
-    // Iniciamos
-    al_init_font_addon(); // Inicializar addon de fuentes
+    // Inicializar addon de fuente
+    al_init_font_addon(); s
 
     // Creamos un temporizador que se va a activa cada (1.0 / 60.0) veces, de esta manera obteniendo una taza de refresco de 60hz
     ALLEGRO_TIMER *temporizador = al_create_timer(1.0 / 60.0);
