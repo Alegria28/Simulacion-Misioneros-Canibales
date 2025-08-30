@@ -1,5 +1,18 @@
 # Simulación del Problema de Misioneros y Caníbales
 
+## Imágenes de la Simulación
+
+A continuación se muestran capturas de pantalla representativas de la simulación:
+
+### Menú Principal
+![Menú Principal](imagenes/menu.png)
+
+### Resolución del Problema
+![Resolución del Problema](imagenes/resolucion.png)
+
+### Pantalla Final
+![Pantalla Final](imagenes/final.png)
+
 Este proyecto es una simulación gráfica del clásico problema de lógica de los Misioneros y Caníbales, implementado en C++ utilizando la biblioteca Allegro 5. El programa permite al usuario definir el número inicial de misioneros y caníbales, y luego visualiza la solución paso a paso, si existe.
 
 ## Características
@@ -90,24 +103,6 @@ Luego, para ejecutar la simulación:
     *   Presiona **ESC** en cualquier momento para salir del programa.
     *   Presiona **R** para regresar al menú principal y probar otros valores.
 
-## Controles del Programa
-
-### Menú Principal (Configuración):
-*   **FLECHA ARRIBA/ABAJO**: Aumentar/disminuir el número seleccionado
-*   **FLECHA IZQUIERDA/DERECHA**: Cambiar entre misioneros y caníbales
-*   **ENTER**: Iniciar la simulación
-*   **ESC**: Salir del programa
-
-### Durante la Simulación:
-*   **FLECHA ARRIBA/ABAJO**: Ajustar velocidad de animación (0.5x - 10x)
-*   **R**: Regresar al menú principal
-*   **ESPACIO**: Reiniciar la simulación con los mismos valores
-*   **ESC**: Salir del programa
-
-### Sin Solución:
-*   **R**: Regresar al menú principal
-*   **ESC**: Salir del programa
-
 ## Archivo de Resultados
 
 Cuando se encuentra una solución exitosa, el programa genera automáticamente un archivo `resultados.txt` que contiene:
@@ -125,40 +120,3 @@ Paso 1: Izq(M:3, C:1) Der(M:0, C:2) Bote:Derecha
 Paso 2: Izq(M:3, C:2) Der(M:0, C:1) Bote:Izquierda
 ...
 ```
-
-## Estructura del Código
-
-*   `main.cpp`: Contiene toda la lógica del juego, incluyendo:
-    *   Definición de la estructura `Estado`.
-    *   Funciones para la validación de estados (`es_valido`, `es_solucion`).
-    *   Función recursiva `resolver_mc_recursivo` para encontrar la solución.
-    *   Funciones de dibujo (`dibujar_persona`, `dibujar_estado`) utilizando Allegro.
-    *   La función `main` que maneja el bucle principal del juego, eventos y la lógica de las fases.
-    *   Generación automática del archivo de resultados cuando se encuentra una solución.
-
-## Archivos Generados
-
-*   `resultados.txt`: Se crea automáticamente cuando se encuentra una solución. Contiene la secuencia completa de pasos para resolver el problema.
-
-## Lógica del Problema
-
-El problema consiste en mover a todos los misioneros y caníbales de una orilla de un río a la otra, utilizando un bote con una capacidad limitada (en esta simulación, 2 personas). La restricción principal es que en ninguna orilla, ni en el bote, el número de caníbales puede superar al número de misioneros, ya que de lo contrario los misioneros serían devorados.
-
-**Reglas del problema:**
-*   El bote puede transportar máximo 2 personas por viaje
-*   El bote no puede cruzar el río vacío (debe llevar al menos 1 persona)
-*   En ningún momento los caníbales pueden superar en número a los misioneros en ninguna orilla
-*   El objetivo es trasladar a todos los misioneros y caníbales a la orilla derecha
-
-**Casos especiales:**
-*   Si solo hay caníbales (0 misioneros), el problema siempre tiene solución
-*   Si hay más caníbales que misioneros desde el inicio, no hay solución posible
-*   El algoritmo utiliza búsqueda en profundidad (DFS) para encontrar una secuencia válida de movimientos
-
-## Características Técnicas
-
-*   **Algoritmo**: Búsqueda en profundidad (DFS) con detección de estados visitados
-*   **Animación**: Interpolación suave del movimiento del bote entre orillas
-*   **Interfaz**: Sistema de fases con controles intuitivos
-*   **Persistencia**: Guardado automático de resultados en archivo de texto
-*   **Validación**: Verificación continua de la validez de los estados del problema

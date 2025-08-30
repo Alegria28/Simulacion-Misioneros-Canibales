@@ -1,4 +1,4 @@
-// Librerías de allegro, ver documentación https://liballeg.org/a5docs/5.2.10.1/ 
+// Librerías de allegro, ver documentación https://liballeg.org/a5docs/5.2.10.1/
 #include <allegro5/allegro5.h>
 #include <allegro5/allegro_font.h>
 #include <allegro5/allegro_primitives.h>
@@ -260,24 +260,24 @@ void dibujar_estado(const Estado &s_actual, const Estado *ptr_s_previo, int tota
     ALLEGRO_COLOR color_orilla = al_map_rgb(34, 139, 34);  // Verde para las Orillas
 
     // Definimos las dimensiones y posiciones relativas de las orillas y el río en la pantalla
-    float ancho_orilla = anchoPantalla * 0.25f; // Cada orilla ocupa un 25% del ancho de la pantalla
-    float ancho_rio = anchoPantalla * 0.5f;     // El río ocupa el 50% central del ancho de la pantalla
+    float ancho_orilla = anchoPantalla * 0.25f;  // Cada orilla ocupa un 25% del ancho de la pantalla
+    float ancho_rio = anchoPantalla * 0.5f;      // El río ocupa el 50% central del ancho de la pantalla
     float inicio_y_orilla = altoPantalla * 0.4f; // Posición Y donde comienzan a dibujarse las orillas y el río
-    float alto_orilla = altoPantalla * 0.5f;    // Altura de las orillas y el río
+    float alto_orilla = altoPantalla * 0.5f;     // Altura de las orillas y el río
 
     // Inicializamos los contadores de misioneros y caníbales en cada orilla basándonos en el estado actual
-    int m_en_orilla_izquierda = s_actual.m_izquierda; 
-    int c_en_orilla_izquierda = s_actual.c_izquierda; 
-    int m_en_orilla_derecha = s_actual.m_derecha;     
-    int c_en_orilla_derecha = s_actual.c_derecha;   
+    int m_en_orilla_izquierda = s_actual.m_izquierda;
+    int c_en_orilla_izquierda = s_actual.c_izquierda;
+    int m_en_orilla_derecha = s_actual.m_derecha;
+    int c_en_orilla_derecha = s_actual.c_derecha;
 
     // Inicializamos los contadores de misioneros y caníbales en el bote a cero, se actualizarán si el bote está en tránsito
     int m_en_bote = 0;
     int c_en_bote = 0;
 
     // Definimos las dimensiones del bote
-    float bote_ancho = 80; 
-    float bote_alto = 40; 
+    float bote_ancho = 80;
+    float bote_alto = 40;
     // Calculamos la posición Y del bote, centrado verticalmente en la zona media del río/orillas
     float bote_y = inicio_y_orilla + alto_orilla * 0.3f;
     // Calculamos la posición X del bote cuando está completamente en el muelle izquierdo
@@ -298,7 +298,7 @@ void dibujar_estado(const Estado &s_actual, const Estado *ptr_s_previo, int tota
         bote_dibujo_actual_x = bote_muelle_izquierdo_x + (bote_muelle_derecho_x - bote_muelle_izquierdo_x) * progreso_anim_bote;
     }
     // Si la posición objetivo del bote es la izquierda (0)
-    else 
+    else
     {
         // El bote se mueve de derecha a izquierda, o ya está a la izquierda
         // Interpolamos la posición X del bote desde el muelle derecho hacia el muelle izquierdo
@@ -330,7 +330,7 @@ void dibujar_estado(const Estado &s_actual, const Estado *ptr_s_previo, int tota
             c_en_orilla_derecha = s_previo.c_derecha;
         }
         // Si el bote en el estado previo estaba en la orilla derecha (1)
-        else 
+        else
         {
             // El bote se estaba moviendo de Derecha a Izquierda (s_actual.bote_pos debería ser 0)
             // Calculamos cuántos misioneros estaban en el bote restando los actuales en la orilla der. de los que había antes
@@ -366,8 +366,8 @@ void dibujar_estado(const Estado &s_actual, const Estado *ptr_s_previo, int tota
 
     // Dibujar las personas en la orilla izquierda
     float persona_x_inicio_izquierda = ancho_orilla * 0.1f; // Posición X inicial para la primera persona en la orilla izquierda
-    float persona_y_inicio = inicio_y_orilla + 30;         // Posición Y inicial para la fila de misioneros
-    float espaciado_persona = 25;                          // Espacio horizontal entre cada persona
+    float persona_y_inicio = inicio_y_orilla + 30;          // Posición Y inicial para la fila de misioneros
+    float espaciado_persona = 25;                           // Espacio horizontal entre cada persona
 
     // Bucle para dibujar cada misionero en la orilla izquierda
     for (int i = 0; i < m_en_orilla_izquierda; ++i)
@@ -456,7 +456,7 @@ int main()
     // Iniciamos el addon para poder dibujar figuras
     al_init_primitives_addon();
     // Inicializar addon de fuente
-    al_init_font_addon(); s
+    al_init_font_addon();
 
     // Creamos un temporizador que se va a activa cada (1.0 / 60.0) veces, de esta manera obteniendo una taza de refresco de 60hz
     ALLEGRO_TIMER *temporizador = al_create_timer(1.0 / 60.0);
@@ -583,7 +583,7 @@ int main()
                         // Si no se pudo abrir o crear
                         {
                             // cerr se utiliza como un cout pero este esta especializado para mandar mensajes de errores en stderr, ademas
-                            // de que este no se guarda en buffer y se muestra inmediatamente 
+                            // de que este no se guarda en buffer y se muestra inmediatamente
                             cerr << "Error: No se pudo abrir el archivo resultados.txt para guardar los resultados." << endl;
                         }
                     }
@@ -707,10 +707,9 @@ int main()
 
                     // Volvemos a resolver el problema con los mismos valores
                     resolver_mc(num_misioneros_input, num_canibales_input, camino_solucion);
-                    
-                    // Cambiamos la fase 
+
+                    // Cambiamos la fase
                     fase_actual = RESOLVIENDO;
-                    
                 }
             }
             // Si estamos en la fase SIN_SOLUCION y se presiona una tecla
@@ -829,10 +828,10 @@ int main()
                 stringstream msg_velocidad;
                 msg_velocidad << "Velocidad: " << velocidad_simulacion << "x (ARRIBA/ABAJO para cambiar)";
                 al_draw_text(fuente, al_map_rgb(200, 200, 200), 10, 10, ALLEGRO_ALIGN_LEFT, msg_velocidad.str().c_str());
-                
+
                 // Mostramos los controles disponibles
                 al_draw_text(fuente, al_map_rgb(180, 180, 180), 10, 30, ALLEGRO_ALIGN_LEFT, "R - Regresar al menu | ESPACIO - Reiniciar simulacion");
-                
+
                 // Si la simulación ha sido completada y estamos en la fase RESUELTO
                 if (fase_actual == RESUELTO)
                 {
