@@ -1,122 +1,122 @@
-# Simulación del Problema de Misioneros y Caníbales
+# 🚢 Missionaries and Cannibals Problem Simulation 🌊
 
-## Imágenes de la Simulación
+## 📸 Simulation Images
 
-A continuación se muestran capturas de pantalla representativas de la simulación:
+Here are some representative screenshots of the simulation:
 
-### Menú Principal
-![Menú Principal](imagenes/menu.png)
+### Main Menu 🏠
+![Main Menu](imagenes/menu.png)
 
-### Resolución del Problema
-![Resolución del Problema](imagenes/resolucion.png)
+### Problem Resolution 🧠
+![Problem Resolution](imagenes/resolucion.png)
 
-### Pantalla Final
-![Pantalla Final](imagenes/final.png)
+### Final Screen 🎉
+![Final Screen](imagenes/final.png)
 
-Este proyecto es una simulación gráfica del clásico problema de lógica de los Misioneros y Caníbales, implementado en C++ utilizando la biblioteca Allegro 5. El programa permite al usuario definir el número inicial de misioneros y caníbales, y luego visualiza la solución paso a paso, si existe.
+This project is a graphical simulation of the classic Missionaries and Cannibals logic problem, implemented in C++ using the Allegro 5 library. The program allows the user to define the initial number of missionaries and cannibals, and then visualizes the step-by-step solution, if one exists.
 
-## Características
+## ✨ Features
 
-*   **Resolución del Problema:** Implementa un algoritmo de búsqueda (DFS) para encontrar una solución al problema de Misioneros y Caníbales.
-*   **Visualización Gráfica:** Utiliza Allegro 5 para dibujar el estado del problema, incluyendo las orillas del río, el bote, y las figuras de los misioneros y caníbales.
-*   **Animación de la Solución:** Muestra la secuencia de movimientos de la solución encontrada de forma animada.
-*   **Entrada de Usuario:** Permite al usuario especificar el número inicial de misioneros y caníbales.
-*   **Control de Velocidad:** El usuario puede ajustar la velocidad de la animación de la solución.
-*   **Detección de Estados Inválidos:** Verifica la validez de los estados para asegurar que los misioneros no sean superados en número por los caníbales en ninguna orilla.
-*   **Generación de Archivo de Resultados:** Cuando se encuentra una solución, se genera automáticamente un archivo `resultados.txt` con la secuencia completa de pasos.
-*   **Controles de Navegación:** Incluye opciones para regresar al menú principal y reiniciar la simulación sin necesidad de cargar archivos.
-*   **Interfaz Interactiva:** Guía al usuario a través de diferentes fases: entrada de datos, resolución/animación, y estado final (solución encontrada o sin solución).
+*   **Problem Solving:** Implements a search algorithm (DFS) to find a solution to the Missionaries and Cannibals problem.
+*   **Graphical Visualization:** Uses Allegro 5 to draw the state of the problem, including the riverbanks, the boat, and the figures of the missionaries and cannibals.
+*   **Solution Animation:** Displays the sequence of movements of the found solution in an animated way.
+*   **User Input:** Allows the user to specify the initial number of missionaries and cannibals.
+*   **Speed Control:** The user can adjust the speed of the solution animation.
+*   **Invalid State Detection:** Verifies the validity of the states to ensure that missionaries are not outnumbered by cannibals on either bank.
+*   **Results File Generation:** When a solution is found, a `results.txt` file is automatically generated with the complete sequence of steps.
+*   **Navigation Controls:** Includes options to return to the main menu and restart the simulation without needing to load files.
+*   **Interactive Interface:** Guides the user through different phases: data entry, resolution/animation, and final state (solution found or no solution).
 
-## Requisitos
+## ⚙️ Requirements
 
-*   Un compilador de C++ (como g++)
-*   Allegro 5 
+*   A C++ compiler (like g++)
+*   Allegro 5
 
-Asegúrate de tener Allegro 5 instalado en tu sistema.
+Make sure you have Allegro 5 installed on your system.
 
-**Para Ubuntu 18.04+ (o derivados):**
+**For Ubuntu 18.04+ (or derivatives):**
 
-Primero, añade el PPA de Allegro. Esto te dará versiones actualizadas de Allegro:
+First, add the Allegro PPA. This will give you updated versions of Allegro:
 ```bash
 sudo add-apt-repository ppa:allegro/5.2
 sudo apt-get update
 ```
-Luego, instala Allegro y los addons necesarios:
+Then, install Allegro and the necessary addons:
 ```bash
 sudo apt-get install liballegro*5.2 liballegro*5-dev
 ```
 
-**Para Windows:**
+**For Windows:**
 
-Existen varias formas de obtener los binarios de Allegro para Windows:
-*   **Nuget:** El paquete de Allegro en Nuget contiene los binarios oficiales en un formato fácil de usar con MSVC.
-*   **Allegro 5.2 binary packages:** Las releases de Allegro en GitHub también vienen con varias distribuciones binarias de Allegro para Windows.
-*   **Allegro 5 dependencies:** El proyecto `allegro_winpkg` en GitHub tiene releases que vienen con las dependencias de Allegro precompiladas para Windows.
+There are several ways to get the Allegro binaries for Windows:
+*   **Nuget:** The Allegro package on Nuget contains the official binaries in an easy-to-use format with MSVC.
+*   **Allegro 5.2 binary packages:** The Allegro releases on GitHub also come with several binary distributions of Allegro for Windows.
+*   **Allegro 5 dependencies:** The `allegro_winpkg` project on GitHub has releases that come with the Allegro dependencies pre-compiled for Windows.
 
-Consulta el [wiki tutorial de Allegro](https://liballeg.org/download.html#windows) para instrucciones detalladas de instalación en Windows.
+Check the [Allegro wiki tutorial](https://liballeg.org/download.html#windows) for detailed installation instructions on Windows.
 
-Para otras distribuciones o sistemas operativos, consulta la [documentación oficial de Allegro](https://liballeg.org/download.html).
+For other distributions or operating systems, consult the [official Allegro documentation](https://liballeg.org/download.html).
 
-## Compilación y Ejecución
+## 🚀 Compilation and Execution
 
-El proyecto incluye tareas de VS Code para facilitar la compilación y ejecución. Si no usas VS Code, puedes compilar el archivo `main.cpp` manualmente desde la terminal.
+The project includes VS Code tasks to facilitate compilation and execution. If you don't use VS Code, you can compile the `main.cpp` file manually from the terminal.
 
-**Usando las tareas de VS Code:**
+**Using VS Code tasks:**
 
-1.  Abre el proyecto en VS Code.
-2.  Abre `main.cpp`.
-3.  Presiona `Ctrl+Shift+B` (o `Cmd+Shift+B` en macOS).
-4.  Selecciona la tarea:
-    *   `Compile Active Allegro File`: Solo compila el archivo.
-    *   `Compile and Run Active Allegro File`: Compila y luego ejecuta la simulación.
+1.  Open the project in VS Code.
+2.  Open `main.cpp`.
+3.  Press `Ctrl+Shift+B` (or `Cmd+Shift+B` on macOS).
+4.  Select the task:
+    *   `Compile Active Allegro File`: Only compiles the file.
+    *   `Compile and Run Active Allegro File`: Compiles and then runs the simulation.
 
-**Manualmente desde la terminal (Linux):**
+**Manually from the terminal (Linux):**
 
-Navega al directorio del proyecto y ejecuta el siguiente comando para compilar:
+Navigate to the project directory and run the following command to compile:
 ```bash
-g++ main.cpp -o misioneros_canibales -std=c++11 `pkg-config --cflags allegro-5 allegro_font-5 allegro_primitives-5` `pkg-config --libs allegro-5 allegro_font-5 allegro_primitives-5`
+g++ main.cpp -o missionaries_cannibals -std=c++11 `pkg-config --cflags allegro-5 allegro_font-5 allegro_primitives-5` `pkg-config --libs allegro-5 allegro_font-5 allegro_primitives-5`
 ```
-Luego, para ejecutar la simulación:
+Then, to run the simulation:
 ```bash
-./misioneros_canibales
+./missionaries_cannibals
 ```
 
-## Cómo Jugar
+## 🎮 How to Play
 
-1.  **Establecer Números Iniciales:**
-    *   Al iniciar, estarás en la pantalla de configuración.
-    *   Usa las teclas de **FLECHA ARRIBA** y **FLECHA ABAJO** para aumentar o disminuir el número de misioneros o caníbales seleccionados.
-    *   Usa las teclas de **FLECHA IZQUIERDA** y **FLECHA DERECHA** para cambiar entre la selección de misioneros y caníbales.
-    *   Presiona **ENTER** para iniciar la simulación con los números establecidos.
+1.  **Set Initial Numbers:**
+    *   When you start, you will be on the configuration screen.
+    *   Use the **UP ARROW** and **DOWN ARROW** keys to increase or decrease the number of selected missionaries or cannibals.
+    *   Use the **LEFT ARROW** and **RIGHT ARROW** keys to switch between selecting missionaries and cannibals.
+    *   Press **ENTER** to start the simulation with the set numbers.
 
-2.  **Visualización de la Solución:**
-    *   Si se encuentra una solución, la animación comenzará a mostrar los pasos.
-    *   Usa la **FLECHA ARRIBA** para aumentar la velocidad de la simulación (máximo 10x).
-    *   Usa la **FLECHA ABAJO** para disminuir la velocidad de la simulación (mínimo 0.5x).
-    *   Presiona **R** para regresar al menú principal en cualquier momento.
-    *   Presiona **ESPACIO** para reiniciar la simulación con los mismos valores iniciales.
+2.  **Solution Visualization:**
+    *   If a solution is found, the animation will begin to show the steps.
+    *   Use the **UP ARROW** to increase the simulation speed (maximum 10x).
+    *   Use the **DOWN ARROW** to decrease the simulation speed (minimum 0.5x).
+    *   Press **R** to return to the main menu at any time.
+    *   Press **SPACE** to restart the simulation with the same initial values.
 
-3.  **Fin de la Simulación:**
-    *   Si se encuentra una solución, se mostrará el mensaje "SOLUCION ENCONTRADA!" y "Simulacion Completa".
-    *   Los resultados se guardan automáticamente en un archivo `resultados.txt` en el directorio del proyecto.
-    *   Si no se encuentra una solución para los valores dados, se mostrará "NO SE ENCONTRO SOLUCION para estos valores."
-    *   Presiona **ESC** en cualquier momento para salir del programa.
-    *   Presiona **R** para regresar al menú principal y probar otros valores.
+3.  **End of Simulation:**
+    *   If a solution is found, the message "SOLUTION FOUND!" and "Simulation Complete" will be displayed.
+    *   The results are automatically saved in a `results.txt` file in the project directory.
+    *   If no solution is found for the given values, "NO SOLUTION FOUND for these values." will be displayed.
+    *   Press **ESC** at any time to exit the program.
+    *   Press **R** to return to the main menu and try other values.
 
-## Archivo de Resultados
+## 📜 Results File
 
-Cuando se encuentra una solución exitosa, el programa genera automáticamente un archivo `resultados.txt` que contiene:
-*   Los parámetros del problema (número de misioneros y caníbales iniciales)
-*   La capacidad del bote
-*   Una secuencia detallada de todos los pasos de la solución
+When a successful solution is found, the program automatically generates a `results.txt` file containing:
+*   The problem parameters (initial number of missionaries and cannibals)
+*   The capacity of the boat
+*   A detailed sequence of all the solution steps
 
-**Ejemplo de contenido del archivo:**
+**Example of file content:**
 ```
-Solución para Misioneros: 3, Caníbales: 3
-Capacidad del bote: 2
+Solution for Missionaries: 3, Cannibals: 3
+Boat capacity: 2
 ------------------------------------------
-Paso 0: Izq(M:3, C:3) Der(M:0, C:0) Bote:Izquierda
-Paso 1: Izq(M:3, C:1) Der(M:0, C:2) Bote:Derecha
-Paso 2: Izq(M:3, C:2) Der(M:0, C:1) Bote:Izquierda
+Step 0: Left(M:3, C:3) Right(M:0, C:0) Boat:Left
+Step 1: Left(M:3, C:1) Right(M:0, C:2) Boat:Right
+Step 2: Left(M:3, C:2) Right(M:0, C:1) Boat:Left
 ...
 ```
